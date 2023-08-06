@@ -176,7 +176,7 @@ def choose_option():
             break
 
 if __name__ == '__main__':
-    DNS = 'postgresql://ADMIN:12345678@localhost:5432/X-OUT_sportwear'
+    DNS = 'postgresql://ADMIN:12345678@localhost:5432/database_name'
     engine = sq.create_engine(DNS, pool_size=20)
     Session = sessionmaker(bind=engine)
     session = Session()
