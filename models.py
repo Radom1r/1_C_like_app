@@ -28,20 +28,10 @@ class Category(Base):
 
 class Storage(Base):
     __tablename__ = 'Storage'
-    item_id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
-    item_name = sq.Column(sq.String(length=100), nullable=False)
-    brand_id = sq.Column(sq.Integer, sq.ForeignKey('Brand.brand_id'))
-    category_id = sq.Column(sq.Integer, sq.ForeignKey('Category.category_id'))
-    size_id = sq.Column(sq.Integer, sq.ForeignKey('Size.size_id'))
-    receive_datetime = sq.Column(sq.DateTime)
-    receive_price = sq.Column(sq.Integer)
-    sale_price = sq.Column(sq.Integer, nullable=False)
-    pottential_revenue = sq.Column(sq.Integer, nullable=False)
+    storage_id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
+    item_id = sq.Column(sq.Integer, sq.ForeignKey('Sold_items.item_id'), unique=True, nullable=False)
     amount_left = sq.Column(sq.Integer)
-    fact_marginality_percent = sq.Column(sq.Integer, nullable=False)
-    brands = relationship('Brand', backref='Storage')
-    Categories = relationship('Category', backref='Storage')
-    sizes = relationship('Size', backref='Storage')
+    sold_items = relationship('Sold_items', backref='Storage')
 
 class Sells(Base):
     __tablename__ = 'Sell'
@@ -53,7 +43,7 @@ class Sells(Base):
 
 class Sold_items(Base):
     __tablename__ = 'Sold_items'
-    item_id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
+    item_id = sq.Column(sq.Integer, primary_key=True)
     item_name = sq.Column(sq.String(length=100), nullable=False)
     brand_id = sq.Column(sq.Integer, sq.ForeignKey('Brand.brand_id'))
     category_id = sq.Column(sq.Integer, sq.ForeignKey('Category.category_id'))
